@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { div2PDF } from "./convert/pdfConvert";
+import { div2PDF, div2PDF2 } from "./convert/pdfConvert";
 import { svgToPng } from "./convert/pngConvert";
 import { fbData } from "./data/fbData";
 import { twData } from "./data/twData";
@@ -21,7 +21,15 @@ import {
 import FileSaver from "file-saver";
 
 class App extends React.Component {
-  handleDownload = async () => {
+  downloadLineChart = async () => {
+    const chart = this.currentChart;
+    let chartSVG = ReactDOM.findDOMNode(chart).children[0];
+
+    const pngData = await svgToPng(chartSVG, 600, 300);
+    FileSaver.saveAs(pngData, "test.png");
+  };
+
+  downloadBarChart = async () => {
     const chart = this.currentChart;
     let chartSVG = ReactDOM.findDOMNode(chart).children[0];
 
@@ -53,20 +61,20 @@ class App extends React.Component {
             />
             <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
           </LineChart>
-          {/* BsFileEarmarkPdf */}
-          {/* BsFileEarmarkImage */}
           <div className='btn'>
-            <BsFileEarmarkImage onClick={this.handleDownload} />
+            <BsFileEarmarkImage onClick={this.downloadLineChart} />
             <BsFileEarmarkPdf onClick={(e) => div2PDF(e)} />
-
-            {/* <button onClick={(e) => div2PDF(e)}>Download PDF</button>
-          <button onClick={this.handleDownload}>Download PNG</button> */}
           </div>
         </div>
-
         <br />
-        <div className='chart'>
-          <BarChart width={600} height={300} data={twData}>
+        {/* /////////////////////////////////////////////////////////////////////////// */}
+        <div className='chart div2PDF2'>
+          <BarChart
+            ref={(chart) => (this.currentChart = chart)}
+            width={600}
+            height={300}
+            data={twData}
+          >
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey='name' />
             <YAxis />
@@ -76,8 +84,8 @@ class App extends React.Component {
             <Bar dataKey='uv' fill='#82ca9d' />
           </BarChart>
           <div className='btn'>
-            <BsFileEarmarkImage onClick={this.handleDownload} />
-            <BsFileEarmarkPdf onClick={(e) => div2PDF(e)} />
+            <BsFileEarmarkImage onClick={this.downloadBarChart} />
+            <BsFileEarmarkPdf onClick={(e) => div2PDF2(e)} />
           </div>
         </div>
       </div>
