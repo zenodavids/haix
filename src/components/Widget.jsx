@@ -40,27 +40,30 @@ class App extends React.Component {
   render() {
     return (
       <div className='flex-container'>
-        <div className=' chart div2PDF'>
-          <LineChart
-            ref={(chart) => (this.currentChart = chart)}
-            width={600}
-            height={300}
-            data={fbData}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-          >
-            <XAxis dataKey='name' />
-            <YAxis />
-            <CartesianGrid strokeDasharray='3 3' />
-            <Tooltip />
-            <Legend />
-            <Line
-              type='monotone'
-              dataKey='pv'
-              stroke='#8884d8'
-              activeDot={{ r: 8 }}
-            />
-            <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
-          </LineChart>
+        <div className='container'>
+          <div className=' chart div2PDF'>
+            <h2>Twitter</h2>
+            <LineChart
+              ref={(chart) => (this.currentChart = chart)}
+              width={600}
+              height={300}
+              data={fbData}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+            >
+              <XAxis dataKey='name' />
+              <YAxis />
+              <CartesianGrid strokeDasharray='3 3' />
+              <Tooltip />
+              <Legend />
+              <Line
+                type='monotone'
+                dataKey='pv'
+                stroke='#8884d8'
+                activeDot={{ r: 8 }}
+              />
+              <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
+            </LineChart>
+          </div>
           <div className='btn'>
             <BsFileEarmarkImage onClick={this.downloadLineChart} />
             <BsFileEarmarkPdf onClick={(e) => div2PDF(e)} />
@@ -68,21 +71,24 @@ class App extends React.Component {
         </div>
         <br />
         {/* /////////////////////////////////////////////////////////////////////////// */}
-        <div className='chart div2PDF2'>
-          <BarChart
-            ref={(chart) => (this.currentChart = chart)}
-            width={600}
-            height={300}
-            data={twData}
-          >
-            <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='name' />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey='pv' fill='#8884d8' />
-            <Bar dataKey='uv' fill='#82ca9d' />
-          </BarChart>
+        <div className='container'>
+          <div className='chart div2PDF2'>
+            <h2>Facebook</h2>
+            <BarChart
+              ref={(chart) => (this.currentChart = chart)}
+              width={600}
+              height={300}
+              data={twData}
+            >
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='name' />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey='pv' fill='#8884d8' />
+              <Bar dataKey='uv' fill='#82ca9d' />
+            </BarChart>
+          </div>
           <div className='btn'>
             <BsFileEarmarkImage onClick={this.downloadBarChart} />
             <BsFileEarmarkPdf onClick={(e) => div2PDF2(e)} />

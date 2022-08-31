@@ -17,9 +17,18 @@
 @media (max-width: 45em) {
 }
 
+h2 {
+  text-align: center;
+  margin: 0 auto 30px;
+  color: gray;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
 @media (max-width: 28em) {
   .flex-container {
     width: 85%;
+    flex-direction: row;
   }
 }
 
@@ -41,6 +50,9 @@
   margin-right: 20px;
 }
 
+.container {
+  display: flex;
+}
 .btn {
   float: right;
 }
