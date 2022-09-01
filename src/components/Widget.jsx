@@ -22,21 +22,23 @@ import FileSaver from "file-saver";
 
 class App extends React.Component {
   downloadLineChart = async () => {
-    const chart = this.currentChart;
-    let chartSVG = ReactDOM.findDOMNode(chart).children[0];
+    const lineChart = this.currentLineChart;
+    let lineChartSVG = ReactDOM.findDOMNode(lineChart).children[0];
 
-    const pngData = await svgToPng(chartSVG, 600, 300);
+    const pngData = await svgToPng(lineChartSVG, 600, 300);
     FileSaver.saveAs(pngData, "test.png");
   };
 
   downloadBarChart = async () => {
-    const chart = this.currentChart;
-    let chartSVG = ReactDOM.findDOMNode(chart).children[0];
+    const barChart = this.currentBarChart;
+    let barChartSVG = ReactDOM.findDOMNode(barChart).children[0];
 
-    const pngData = await svgToPng(chartSVG, 600, 300);
+    const pngData = await svgToPng(barChartSVG, 600, 300);
     FileSaver.saveAs(pngData, "test.png");
   };
+  // ///////////////////////////////////////////////
 
+  ////////////////////////////////
   render() {
     return (
       <div className='flex-container'>
@@ -44,7 +46,7 @@ class App extends React.Component {
           <div className=' chart div2PDF'>
             <h2>Twitter</h2>
             <LineChart
-              ref={(chart) => (this.currentChart = chart)}
+              ref={(lineChart) => (this.currentLineChart = lineChart)}
               width={600}
               height={300}
               data={fbData}
@@ -75,7 +77,7 @@ class App extends React.Component {
           <div className='chart div2PDF2'>
             <h2>Facebook</h2>
             <BarChart
-              ref={(chart) => (this.currentChart = chart)}
+              ref={(barChart) => (this.currentBarChart = barChart)}
               width={600}
               height={300}
               data={twData}
